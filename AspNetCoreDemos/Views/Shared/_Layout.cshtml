@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.3.1026/styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.3.1026/styles/kendo.rtl.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.3.1026/styles/kendo.default.min.css" />
+    <link rel="stylesheet" href="~/shared/examples-offline.css" />
+
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2017.3.1026/js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2017.3.1026/js/kendo.aspnetmvc.min.js"></script>
+    <script src="~/shared/console.js"></script>
+    <script src="~/shared/prettify.js"></script>
+
+    @{
+        // Include the JavaScript for the current culture
+        var culture = System.Globalization.CultureInfo.CurrentCulture.ToString();
+    }
+
+    <script src="@("https://kendo.cdn.telerik.com/2017.3.1026/js/cultures/kendo.culture." + culture + ".min.js")"></script>
+
+    <script>
+		@* Set the current culture *@
+        kendo.culture("@culture");
+    </script>
+
+    @RenderSection("scripts", required: false)
+    @RenderSection("HeadContent", required: false)
+</head>
+<body>
+    <div class="page">
+        <a class="offline-button" href="@(Url.RouteUrl("Default", new { controller = "", action = "" }))">Back to all examples</a>
+
+        <div id="example" class="k-content">
+            @RenderBody()
+        </div>
+
+        @{
+            ViewData["ViewPath"] = ((Microsoft.AspNetCore.Mvc.Razor.RazorView)ViewContext.View).RazorPage.Path;
+        }
+        @Html.Partial("~/Views/Shared/_Source.cshtml", ViewData)
+
+    </div>
+</body>
+</html>
